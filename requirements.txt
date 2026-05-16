@@ -3,3 +3,5 @@ PyPDF2
 google-generativeai
 requests
 gunicorn
+sentence-transformers
+torch

@@ -18,7 +18,7 @@ Built with Flask, Gemini AI, semantic scoring engines, and cinematic recruiter-g
 
 ## Interview Console
 
-![Interview](screenshots/interview.png)
+![Interview](screenshots/Interview.png)
 
 ## Intelligence Dashboard
 Advanced ATS evaluation with:

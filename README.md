@@ -9,7 +9,16 @@ Built with Flask, Gemini AI, semantic scoring engines, and cinematic recruiter-g
 # Preview
 
 ## Landing Experience
-Luxury cinematic resume upload interface with semantic analysis engine.
+
+![Landing](screenshots/landing.png)
+
+## ATS Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+## Interview Console
+
+![Interview](screenshots/interview.png)
 
 ## Intelligence Dashboard
 Advanced ATS evaluation with:

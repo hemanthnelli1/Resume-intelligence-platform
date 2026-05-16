@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resume Intelligence Report</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg:#050505;
+    --panel:#0c0c0c;
+    --gold:#d6b25e;
+    --gold-soft:#f3d68f;
+    --muted:#6f6757;
+    --text:#f5f2ea;
+    --border:rgba(214,178,94,0.12);
+    --border2:rgba(214,178,94,0.26);
+}
+
+body{
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:'Inter',sans-serif;
+
+    overflow-x:hidden;
+
+    position:relative;
+}
+
+/* BACKGROUND */
+
+body::before{
+
+    content:'';
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at 20% 25%, rgba(214,178,94,0.08), transparent 35%),
+    radial-gradient(circle at 80% 30%, rgba(214,178,94,0.05), transparent 30%),
+    radial-gradient(circle at center, rgba(214,178,94,0.03), transparent 60%);
+
+    pointer-events:none;
+}
+
+body::after{
+
+    content:'';
+
+    position:fixed;
+
+    inset:0;
+
+    opacity:0.03;
+
+    background-image:
+    radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+
+    background-size:4px 4px;
+
+    pointer-events:none;
+}
+
+/* WATERMARK */
+
+.watermark{
+
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    font-size:150px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-weight:700;
+
+    color:rgba(255,255,255,0.02);
+
+    letter-spacing:-8px;
+
+    pointer-events:none;
+
+    user-select:none;
+}
+
+/* MAIN */
+
+.main{
+
+    width:100%;
+
+    padding:70px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* HERO */
+
+.hero{
+
+    display:grid;
+
+    grid-template-columns:1.2fr 0.8fr;
+
+    gap:40px;
+
+    margin-bottom:40px;
+}
+
+.hero-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+.brand{
+
+    color:var(--muted);
+
+    letter-spacing:6px;
+
+    text-transform:uppercase;
+
+    font-size:11px;
+
+    margin-bottom:30px;
+}
+
+.hero-title{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:120px;
+
+    line-height:0.85;
+
+    letter-spacing:-5px;
+}
+
+.hero-title span{
+
+    color:var(--gold);
+
+    font-style:italic;
+
+    font-weight:400;
+}
+
+.hero-sub{
+
+    margin-top:30px;
+
+    color:var(--muted);
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    font-size:11px;
+}
+
+/* SCORE PANEL */
+
+.score-panel{
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,0.02);
+
+    padding:50px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+.score-panel::before{
+
+    content:'';
+
+    position:absolute;
+
+    top:0;
+    left:12%;
+    right:12%;
+
+    height:1px;
+
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.score-label{
+
+    color:var(--muted);
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    font-size:10px;
+
+    margin-bottom:35px;
+}
+
+.score-ring{
+
+    width:240px;
+
+    height:240px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:2px solid rgba(214,178,94,0.14);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+}
+
+.score-ring::before{
+
+    content:'';
+
+    position:absolute;
+
+    inset:12px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(214,178,94,0.24);
+}
+
+.score-value{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:92px;
+
+    color:var(--gold);
+}
+
+.score-title{
+
+    margin-top:35px;
+
+    text-align:center;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:32px;
+
+    color:var(--gold-soft);
+}
+
+.score-desc{
+
+    margin-top:12px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    font-size:13px;
+}
+
+/* METRICS */
+
+.metrics{
+
+    margin-top:35px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:22px;
+}
+
+.metric{
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,0.02);
+
+    padding:26px;
+}
+
+.metric-label{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    margin-bottom:18px;
+}
+
+.metric-value{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:48px;
+
+    color:var(--gold-soft);
+}
+
+/* GRID */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:35px;
+
+    margin-top:35px;
+}
+
+/* PANEL */
+
+.panel{
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,0.02);
+
+    padding:42px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.panel::before{
+
+    content:'';
+
+    position:absolute;
+
+    top:0;
+    left:12%;
+    right:12%;
+
+    height:1px;
+
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.section-label{
+
+    color:var(--muted);
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    font-size:10px;
+
+    margin-bottom:20px;
+}
+
+.section-title{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:52px;
+
+    color:var(--gold-soft);
+
+    margin-bottom:28px;
+
+    font-weight:500;
+}
+
+/* SUMMARY */
+
+.summary{
+
+    font-size:16px;
+
+    line-height:2;
+
+    color:#d5cfc1;
+}
+
+/* SKILLS */
+
+.skills{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+}
+
+.skill{
+
+    padding:14px 22px;
+
+    border:1px solid var(--border2);
+
+    background:rgba(214,178,94,0.04);
+
+    color:var(--gold-soft);
+
+    font-size:13px;
+
+    letter-spacing:1px;
+
+    transition:0.3s ease;
+}
+
+.skill:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--gold);
+}
+
+.missing{
+
+    border-color:rgba(188,104,104,0.24);
+
+    color:#d79d9d;
+
+    background:rgba(188,104,104,0.05);
+}
+
+/* CHECKS */
+
+.checks{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+}
+
+.check{
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    background:rgba(255,255,255,0.015);
+
+    padding:22px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.yes{
+
+    color:#d7ff72;
+}
+
+.no{
+
+    color:#d09393;
+}
+
+/* QUESTIONS */
+
+.questions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+}
+
+.question{
+
+    border:1px solid rgba(214,178,94,0.14);
+
+    background:rgba(214,178,94,0.03);
+
+    padding:24px;
+
+    transition:0.3s ease;
+}
+
+.question:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--gold);
+}
+
+.question-number{
+
+    color:var(--gold);
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    margin-bottom:14px;
+}
+
+.question-text{
+
+    line-height:1.8;
+
+    color:#e2dccf;
+}
+
+/* CHAT */
+
+.chat-panel{
+
+    margin-top:35px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,0.02);
+
+    padding:42px;
+}
+
+.messages{
+
+    height:380px;
+
+    overflow-y:auto;
+
+    margin-bottom:24px;
+}
+
+.message{
+
+    max-width:78%;
+
+    padding:20px 24px;
+
+    margin-bottom:18px;
+
+    line-height:1.9;
+
+    animation:fadeIn 0.4s ease;
+}
+
+.user{
+
+    margin-left:auto;
+
+    border:1px solid var(--border2);
+
+    background:rgba(214,178,94,0.05);
+}
+
+.bot{
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    background:rgba(255,255,255,0.02);
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.input-row{
+
+    display:flex;
+
+    gap:18px;
+}
+
+.input-row input{
+
+    flex:1;
+
+    background:transparent;
+
+    border:1px solid var(--border);
+
+    padding:20px;
+
+    color:white;
+
+    outline:none;
+
+    font-size:15px;
+}
+
+.input-row input:focus{
+
+    border-color:var(--gold);
+}
+
+.input-row button{
+
+    padding:20px 40px;
+
+    background:transparent;
+
+    border:1px solid var(--border2);
+
+    color:var(--gold);
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+
+.input-row button:hover{
+
+    background:rgba(214,178,94,0.06);
+
+    border-color:var(--gold);
+}
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:90px;
+
+    text-align:center;
+}
+
+.footer-label{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    margin-bottom:16px;
+}
+
+.footer-mail{
+
+    color:#d7ff63;
+
+    font-size:22px;
+
+    margin-bottom:22px;
+}
+
+.footer-copy{
+
+    color:rgba(255,255,255,0.18);
+
+    font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:1200px){
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .metrics{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero-title{
+        font-size:82px;
+    }
+
+    .watermark{
+        font-size:180px;
+    }
+}
+
+@media(max-width:768px){
+
+    .main{
+        padding:28px 20px 60px;
+    }
+
+    .hero-title{
+        font-size:58px;
+    }
+
+    .metrics{
+        grid-template-columns:1fr;
+    }
+
+    .score-ring{
+        width:200px;
+        height:200px;
+    }
+
+    .score-value{
+        font-size:74px;
+    }
+
+    .input-row{
+        flex-direction:column;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="watermark">
+HEMANTH NELLI
+</div>
+
+<div class="main">
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="hero-left">
+
+            <div class="brand">
+                Resume Intelligence Platform
+            </div>
+
+            <div class="hero-title">
+                AI <span>Resume</span>
+                <br>
+                Intelligence
+            </div>
+
+            <div class="hero-sub">
+                Semantic Resume Analysis — ATS Intelligence — AI Evaluation
+            </div>
+
+        </div>
+
+        <div class="score-panel">
+
+            <div class="score-label">
+                ATS Intelligence Score
+            </div>
+
+            <div class="score-ring">
+
+                <div class="score-value">
+                    {{ ats_score }}%
+                </div>
+
+            </div>
+
+            <div class="score-title">
+                {{ ats_label }}
+            </div>
+
+            <div class="score-desc">
+                AI semantic engine completed deep analysis
+                on resume structure, ATS optimization,
+                engineering depth, and interview readiness.
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- METRICS -->
+
+    <div class="metrics">
+
+        <div class="metric">
+
+            <div class="metric-label">
+                Semantic Match
+            </div>
+
+            <div class="metric-value">
+                {{ semantic_match }}%
+            </div>
+
+        </div>
+
+        <div class="metric">
+
+            <div class="metric-label">
+                Resume Strength
+            </div>
+
+            <div class="metric-value">
+                {{ resume_strength }}%
+            </div>
+
+        </div>
+
+        <div class="metric">
+
+            <div class="metric-label">
+                AI Confidence
+            </div>
+
+            <div class="metric-value">
+                {{ ai_confidence }}%
+            </div>
+
+        </div>
+
+        <div class="metric">
+
+            <div class="metric-label">
+                Skills Detected
+            </div>
+
+            <div class="metric-value">
+                {{ resume_skills|length }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SUMMARY -->
+
+    <div class="panel" style="margin-top:35px;">
+
+        <div class="section-label">
+            AI Executive Summary
+        </div>
+
+        <div class="section-title">
+            Candidate Intelligence Analysis
+        </div>
+
+        <div class="summary">
+
+            This candidate demonstrates strong modern
+            software engineering capability with practical
+            experience across frontend, backend, DSA,
+            and system-oriented development. The profile
+            shows excellent project depth with advanced
+            engineering terminology including distributed
+            systems, caching strategies, authentication,
+            and scalable architecture concepts. Resume
+            quality can further improve through stronger
+            quantified achievements and deployment-oriented
+            engineering experience.
+
+        </div>
+
+    </div>
+
+    <!-- SKILLS -->
+
+    <div class="grid">
+
+        <div class="panel">
+
+            <div class="section-label">
+                Semantic Skill Detection
+            </div>
+
+            <div class="section-title">
+                Technical Skills
+            </div>
+
+            <div class="skills">
+
+                {% for skill in resume_skills %}
+
+                    <div class="skill">
+                        {{ skill }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="section-label">
+                AI Gap Analysis
+            </div>
+
+            <div class="section-title">
+                Missing Intelligence Areas
+            </div>
+
+            <div class="skills">
+
+                {% for skill in missing_skills %}
+
+                    <div class="skill missing">
+                        {{ skill }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- STRUCTURE + QUESTIONS -->
+
+    <div class="grid">
+
+        <div class="panel">
+
+            <div class="section-label">
+                Resume Architecture
+            </div>
+
+            <div class="section-title">
+                Structure Analysis
+            </div>
+
+            <div class="checks">
+
+                {% for section, present in sections.items() %}
+
+                <div class="check">
+
+                    <div>
+                        {{ section }}
+                    </div>
+
+                    {% if present %}
+                        <div class="yes">✓ Present</div>
+                    {% else %}
+                        <div class="no">✕ Missing</div>
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="section-label">
+                AI Interview Engine
+            </div>
+
+            <div class="section-title">
+                Interview Simulation
+            </div>
+
+            <div class="questions">
+
+                {% for question in questions %}
+
+                <div class="question">
+
+                    <div class="question-number">
+                        Question {{ loop.index }}
+                    </div>
+
+                    <div class="question-text">
+                        {{ question }}
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CHAT -->
+
+    <div class="chat-panel">
+
+        <div class="section-label">
+            Live AI Assistant
+        </div>
+
+        <div class="section-title">
+            AI Interview Console
+        </div>
+
+        <div class="messages" id="chat"></div>
+
+        <div class="input-row">
+
+            <input
+                type="text"
+                id="question"
+                placeholder="Ask any technical or interview question..."
+            >
+
+            <button onclick="askAI()">
+                Ask AI
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <div class="footer-label">
+            Get In Touch
+        </div>
+
+        <div class="footer-mail">
+            hemanthnelli1@gmail.com
+        </div>
+
+        <div class="footer-copy">
+            © 2026 — Built & designed by Hemanth Nelli
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function askAI(){
+
+    let q = document.getElementById("question").value;
+
+    if(!q) return;
+
+    let chat = document.getElementById("chat");
+
+    chat.innerHTML += `
+        <div class="message user">${q}</div>
+    `;
+
+    let thinking = document.createElement("div");
+
+    thinking.className = "message bot";
+
+    thinking.innerHTML = "AI analysing request...";
+
+    chat.appendChild(thinking);
+
+    chat.scrollTop = chat.scrollHeight;
+
+    fetch("/ask",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+
+        body:"question=" + encodeURIComponent(q)
+
+    })
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        thinking.remove();
+
+        chat.innerHTML += `
+            <div class="message bot">${data.answer}</div>
+        `;
+
+        chat.scrollTop = chat.scrollHeight;
+    })
+
+    .catch(() => {
+
+        thinking.innerHTML =
+        "AI engine unavailable.";
+    });
+
+    document.getElementById("question").value = "";
+}
+
+</script>
+
+</body>
+</html>

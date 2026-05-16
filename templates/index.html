@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resume Intelligence System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#050505;
+    --panel:#0a0a0a;
+    --gold:#d4b15a;
+    --gold-soft:#f1d488;
+    --text:#f5f2ea;
+    --muted:#6d6658;
+    --border:rgba(212,177,90,0.15);
+    --border2:rgba(212,177,90,0.28);
+}
+
+body{
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    height:100vh;
+
+    overflow:hidden;
+
+    position:relative;
+
+    font-family:'Inter',sans-serif;
+}
+
+/* BACKGROUND */
+
+body::before{
+
+    content:'';
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at 20% 30%,
+    rgba(212,177,90,0.08),
+    transparent 30%),
+
+    radial-gradient(circle at 80% 70%,
+    rgba(212,177,90,0.05),
+    transparent 30%),
+
+    radial-gradient(circle at center,
+    rgba(212,177,90,0.03),
+    transparent 60%);
+
+    animation:ambient 10s ease infinite;
+}
+
+@keyframes ambient{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.04);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* GRAIN */
+
+body::after{
+
+    content:'';
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0.03;
+
+    background-image:
+    radial-gradient(#ffffff 1px, transparent 1px);
+
+    background-size:3px 3px;
+
+    pointer-events:none;
+}
+
+/* WATERMARK */
+
+.watermark{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    font-size:720px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    color:rgba(255,255,255,0.02);
+
+    font-weight:700;
+
+    letter-spacing:-35px;
+
+    pointer-events:none;
+
+    user-select:none;
+}
+
+/* MAIN */
+
+.main{
+
+    width:100vw;
+
+    height:100vh;
+
+    display:grid;
+
+    grid-template-columns:58% 42%;
+
+    position:relative;
+
+    z-index:2;
+
+    overflow:hidden;
+}
+
+/* LEFT */
+
+.left{
+
+    padding:90px 80px 90px 60px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+.eyebrow{
+
+    color:var(--muted);
+
+    letter-spacing:6px;
+
+    text-transform:uppercase;
+
+    font-size:11px;
+
+    margin-bottom:35px;
+}
+
+.hero-title{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:145px;
+
+    line-height:0.84;
+
+    letter-spacing:-6px;
+
+    margin-bottom:35px;
+}
+
+.hero-title span{
+
+    color:var(--gold);
+
+    font-style:italic;
+
+    font-weight:400;
+}
+
+.hero-sub{
+
+    max-width:760px;
+
+    color:#d2ccbf;
+
+    line-height:1.9;
+
+    font-size:17px;
+
+    margin-bottom:55px;
+}
+
+/* FEATURES */
+
+.features{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:16px;
+}
+
+.feature{
+
+    padding:15px 24px;
+
+    border:1px solid var(--border2);
+
+    background:rgba(212,177,90,0.03);
+
+    color:var(--gold-soft);
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    transition:0.3s ease;
+}
+
+.feature:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--gold);
+}
+
+/* RIGHT */
+
+.right{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding:40px 40px 40px 0;
+}
+
+/* PANEL */
+
+.panel{
+
+    width:100%;
+
+    height:92vh;
+
+    background:rgba(10,10,10,0.84);
+
+    border:1px solid var(--border);
+
+    padding:55px 50px;
+
+    position:relative;
+
+    backdrop-filter:blur(22px);
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.panel::before{
+
+    content:'';
+
+    position:absolute;
+
+    top:0;
+
+    left:12%;
+
+    right:12%;
+
+    height:1px;
+
+    background:linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    transparent
+    );
+}
+
+/* HEADER */
+
+.panel-label{
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    letter-spacing:6px;
+
+    text-transform:uppercase;
+
+    margin-bottom:24px;
+}
+
+.panel-title{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:78px;
+
+    line-height:0.88;
+
+    margin-bottom:16px;
+}
+
+.panel-title span{
+
+    color:var(--gold);
+
+    font-style:italic;
+
+    font-weight:400;
+}
+
+.panel-sub{
+
+    color:var(--muted);
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    font-size:11px;
+
+    margin-bottom:50px;
+
+    padding-bottom:26px;
+
+    border-bottom:1px solid var(--border);
+}
+
+/* FORM */
+
+.form-area{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+/* ERROR */
+
+.error-msg{
+
+    color:#ff7d7d;
+
+    margin-bottom:22px;
+
+    font-size:14px;
+}
+
+/* UPLOAD */
+
+.upload-zone{
+
+    border:1px dashed var(--border2);
+
+    padding:75px 40px;
+
+    text-align:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:0.35s ease;
+
+    cursor:pointer;
+}
+
+.upload-zone:hover{
+
+    border-color:var(--gold);
+
+    background:rgba(212,177,90,0.04);
+
+    transform:translateY(-2px);
+}
+
+.upload-icon{
+
+    font-size:68px;
+
+    color:var(--gold);
+
+    margin-bottom:20px;
+
+    font-family:'Cormorant Garamond',serif;
+}
+
+.upload-text{
+
+    font-size:14px;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    margin-bottom:10px;
+}
+
+.upload-sub{
+
+    color:var(--gold);
+
+    font-size:11px;
+
+    letter-spacing:2px;
+}
+
+input[type=file]{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    opacity:0;
+
+    cursor:pointer;
+}
+
+.file-name{
+
+    margin-top:22px;
+
+    color:var(--gold-soft);
+
+    text-align:center;
+
+    font-size:14px;
+
+    min-height:18px;
+}
+
+/* BUTTON */
+
+.submit-btn{
+
+    width:100%;
+
+    margin-top:45px;
+
+    padding:25px;
+
+    background:transparent;
+
+    border:1px solid var(--border2);
+
+    color:var(--gold);
+
+    letter-spacing:6px;
+
+    text-transform:uppercase;
+
+    font-size:13px;
+
+    cursor:pointer;
+
+    transition:0.35s ease;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.submit-btn::before{
+
+    content:'';
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(212,177,90,0.08);
+
+    transform:translateX(-100%);
+
+    transition:0.45s ease;
+}
+
+.submit-btn:hover::before{
+
+    transform:translateX(0);
+}
+
+.submit-btn:hover{
+
+    border-color:var(--gold);
+
+    transform:translateY(-2px);
+}
+
+.submit-btn span{
+
+    position:relative;
+
+    z-index:1;
+}
+
+/* FOOTER */
+
+.panel-footer{
+
+    margin-top:auto;
+
+    text-align:center;
+
+    padding-top:35px;
+}
+
+.footer-label{
+
+    color:var(--muted);
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+    font-size:10px;
+
+    margin-bottom:14px;
+}
+
+.footer-mail{
+
+    color:#d7ff63;
+
+    font-size:17px;
+
+    font-weight:500;
+
+    margin-bottom:18px;
+}
+
+.footer-copy{
+
+    color:rgba(255,255,255,0.18);
+
+    font-size:13px;
+}
+
+/* LOADER */
+
+.loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.96);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    z-index:9999;
+}
+
+.loader.show{
+
+    display:flex;
+}
+
+.ring{
+
+    width:90px;
+
+    height:90px;
+
+    border:2px solid rgba(255,255,255,0.08);
+
+    border-top:2px solid var(--gold);
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.loader-title{
+
+    margin-top:28px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:36px;
+
+    color:var(--gold);
+
+    font-style:italic;
+}
+
+.loader-sub{
+
+    margin-top:12px;
+
+    color:var(--muted);
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    font-size:11px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="watermark">
+AI
+</div>
+
+<div class="main">
+
+    <!-- LEFT -->
+
+    <div class="left">
+
+        <div class="eyebrow">
+            AI Resume Intelligence Platform
+        </div>
+
+        <div class="hero-title">
+            Resume
+            <br>
+            <span>Intelligence</span>
+            <br>
+            System
+        </div>
+
+        <div class="hero-sub">
+
+            Semantic AI-powered hiring intelligence platform
+            built for ATS optimization, resume enhancement,
+            intelligent screening, and AI-driven interview analysis.
+
+        </div>
+
+        <div class="features">
+
+            <div class="feature">
+                Semantic AI
+            </div>
+
+            <div class="feature">
+                ATS Intelligence
+            </div>
+
+            <div class="feature">
+                Resume Optimization
+            </div>
+
+            <div class="feature">
+                AI Feedback
+            </div>
+
+            <div class="feature">
+                Interview AI
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="right">
+
+        <div class="panel">
+
+            <div class="panel-label">
+                Resume Analysis Module
+            </div>
+
+            <div class="panel-title">
+                Upload
+                <span>Resume</span>
+            </div>
+
+            <div class="panel-sub">
+                AI Hiring & Optimization Engine — 2026
+            </div>
+
+            <form
+                class="form-area"
+                method="POST"
+                enctype="multipart/form-data"
+                onsubmit="return validateForm()"
+                autocomplete="off"
+            >
+
+                {% if error %}
+                <div class="error-msg">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <div class="upload-zone">
+
+                    <div class="upload-icon">
+                        ↑
+                    </div>
+
+                    <div class="upload-text">
+                        Drop Resume Here
+                    </div>
+
+                    <div class="upload-sub">
+                        PDF Accepted
+                    </div>
+
+                    <input
+                        type="file"
+                        name="resume"
+                        accept=".pdf"
+                        required
+                        onchange="showFile(event)"
+                    >
+
+                </div>
+
+                <div class="file-name" id="fileName">
+                    No file selected
+                </div>
+
+                <button
+                    class="submit-btn"
+                    type="submit"
+                >
+
+                    <span>
+                        Analyse Intelligence
+                    </span>
+
+                </button>
+
+                <!-- FOOTER -->
+
+                <div class="panel-footer">
+
+                    <div class="footer-label">
+                        Get In Touch
+                    </div>
+
+                    <div class="footer-mail">
+                        hemanthnelli1@gmail.com
+                    </div>
+
+                    <div class="footer-copy">
+                        © 2026 — Built & designed by Hemanth Nelli
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- LOADER -->
+
+<div class="loader" id="loader">
+
+    <div class="ring"></div>
+
+    <div class="loader-title">
+        Analysing Intelligence
+    </div>
+
+    <div class="loader-sub">
+        Semantic AI Processing Active...
+    </div>
+
+</div>
+
+<script>
+
+function showFile(event){
+
+    const file = event.target.files[0];
+
+    if(file){
+
+        document.getElementById("fileName").innerHTML =
+        "Selected File: " + file.name;
+
+    }else{
+
+        document.getElementById("fileName").innerHTML =
+        "No file selected";
+    }
+}
+
+function validateForm(){
+
+    const fileInput =
+    document.querySelector('input[type="file"]');
+
+    if(fileInput.files.length === 0){
+
+        alert("Please upload a resume first.");
+
+        return false;
+    }
+
+    document
+    .getElementById("loader")
+    .classList.add("show");
+
+    return true;
+}
+
+</script>
+
+</body>
+</html>

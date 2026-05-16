@@ -6,7 +6,7 @@ import re
 import requests
 from datetime import datetime
 import google.generativeai as genai
-from sentence_transformers import SentenceTransformer
+
 from sklearn.metrics.pairwise import cosine_similarity
 import sqlite3
 
@@ -36,9 +36,7 @@ gemini_model = genai.GenerativeModel(
 # SEMANTIC MODEL
 # =====================================================
 
-semantic_model = SentenceTransformer(
-    "all-MiniLM-L6-v2"
-)
+
 
 # =====================================================
 # DATABASE

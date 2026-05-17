@@ -12,6 +12,9 @@ import sqlite3
 
 app = Flask(__name__)
 
+client = genai.Client(
+    api_key=os.getenv("GEMINI_API_KEY")
+)
 # =====================================================
 # CONFIG
 # =====================================================
@@ -24,9 +27,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # GEMINI CONFIG
 # =====================================================
 
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
 
 # =====================================================
 # SEMANTIC MODEL
@@ -649,7 +649,7 @@ def generate_resume_summary(text):
     try:
 
         response = client.models.generate_content(
-            model="gemini-1.5-flash-002",
+            model="gemini-2.0-flash",
             contents=f"""
             Analyze this resume.
 
@@ -680,7 +680,7 @@ def rewrite_resume_bullet(bullet):
     try:
 
         response = client.models.generate_content(
-            model="gemini-1.5-flash-002",
+            model="gemini-2.0-flash",
             contents=f"""
             Rewrite this resume bullet professionally
             with stronger action verbs and metrics.
@@ -707,17 +707,13 @@ def get_ai_answer(question):
     try:
 
         response = client.models.generate_content(
-            model="gemini-1.5-flash-002",
-            contents=f"Answer professionally: {question}"
+            model="gemini-2.0-flash",
+            contents=question
         )
-
-        print("GEMINI RESPONSE:", response)
 
         return response.text
 
     except Exception as e:
-
-        print("FULL GEMINI ERROR:", str(e))
 
         return str(e)
 

@@ -1,6 +1,6 @@
 Flask
 PyPDF2
-google-generativeai
+
 requests
 gunicorn
 scikit-learn

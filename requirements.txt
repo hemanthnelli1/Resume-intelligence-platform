@@ -1,7 +1,5 @@
 Flask
 PyPDF2
-
 requests
 gunicorn
-scikit-learn
-google-genai
+groq

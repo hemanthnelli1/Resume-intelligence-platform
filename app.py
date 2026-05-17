@@ -649,7 +649,7 @@ def generate_resume_summary(text):
     try:
 
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-1.5-flash",
             contents=f"""
             Analyze this resume.
 
@@ -680,7 +680,7 @@ def rewrite_resume_bullet(bullet):
     try:
 
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-1.5-flash",
             contents=f"""
             Rewrite this resume bullet professionally
             with stronger action verbs and metrics.
@@ -707,7 +707,7 @@ def get_ai_answer(question):
     try:
 
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-1.5-flash",
             contents=f"Answer professionally: {question}"
         )
 
@@ -719,7 +719,7 @@ def get_ai_answer(question):
 
         print("FULL GEMINI ERROR:", str(e))
 
-        return f"ERROR: {str(e)}"
+        return "AI service temporarily busy. Please try again in a minute."
 
 # =====================================================
 # SAVE ANALYSIS

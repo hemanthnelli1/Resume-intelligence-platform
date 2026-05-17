@@ -708,16 +708,18 @@ def get_ai_answer(question):
 
         response = client.models.generate_content(
             model="gemini-1.5-flash",
-            contents=f"Answer this professionally: {question}"
+            contents=f"Answer professionally: {question}"
         )
+
+        print("GEMINI RESPONSE:", response)
 
         return response.text
 
     except Exception as e:
 
-        print("GEMINI ERROR:", e)
+        print("FULL GEMINI ERROR:", str(e))
 
-        return "AI engine unavailable."
+        return f"ERROR: {str(e)}"
 
 # =====================================================
 # SAVE ANALYSIS

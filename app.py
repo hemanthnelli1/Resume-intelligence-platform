@@ -5,7 +5,7 @@ import os
 import re
 import requests
 from datetime import datetime
-import google.generativeai as genai
+from google import genai
 
 from sklearn.metrics.pairwise import cosine_similarity
 import sqlite3
@@ -24,12 +24,8 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # GEMINI CONFIG
 # =====================================================
 
-genai.configure(
+client = genai.Client(
     api_key=os.getenv("GEMINI_API_KEY")
-)
-
-gemini_model = genai.GenerativeModel(
-    "gemini-1.5-flash"
 )
 
 # =====================================================
@@ -715,21 +711,16 @@ def get_ai_answer(question):
 
     try:
 
-        prompt = f"""
-        Answer this interview/career question professionally:
-
-        {question}
-        """
-
-        response = gemini_model.generate_content(
-            prompt
+        response = client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=f"Answer this professionally: {question}"
         )
 
         return response.text
 
     except Exception as e:
 
-        print("GEMINI CHAT ERROR:", e)
+        print("GEMINI ERROR:", e)
 
         return "AI engine unavailable."
 

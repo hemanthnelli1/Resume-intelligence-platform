@@ -4,3 +4,4 @@ google-generativeai
 requests
 gunicorn
 scikit-learn
+google-genai

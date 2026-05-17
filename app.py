@@ -109,8 +109,8 @@ def detect_skills(text, skills_db):
     detected = []
     text_lower = text.lower()
     for skill in skills_db:
-        # Check for whole word / phrase match
-        if skill.lower() in text_lower:
+        pattern = r'\b' + re.escape(skill.lower()) + r'\b'
+        if re.search(pattern, text_lower):
             detected.append(skill.title())
     return list(set(detected))
 # =====================================================

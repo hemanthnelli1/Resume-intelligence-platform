@@ -719,7 +719,7 @@ def get_ai_answer(question):
 
         print("FULL GEMINI ERROR:", str(e))
 
-        return "AI service temporarily busy. Please try again in a minute."
+        return str(e)
 
 # =====================================================
 # SAVE ANALYSIS

@@ -3,7 +3,7 @@ import PyPDF2
 import json
 import os
 import re
-import requests
+
 from datetime import datetime
 from google import genai
 
@@ -648,58 +648,53 @@ def generate_resume_summary(text):
 
     try:
 
-        prompt = f"""
+        response = client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=f"""
+            Analyze this resume.
 
-        Analyze this resume.
+            Give:
+            1. Professional summary
+            2. Career domain
+            3. Top strengths
+            4. Improvement suggestions
 
-        Give:
-
-        1. Professional summary
-        2. Career domain
-        3. Top strengths
-        4. Improvement suggestions
-
-        Resume:
-        {text[:5000]}
-        """
-
-        response = gemini_model.generate_content(
-            prompt
+            Resume:
+            {text[:5000]}
+            """
         )
 
         return response.text
 
     except Exception as e:
 
-        print("GEMINI ERROR:", e)
+        print("GEMINI SUMMARY ERROR:", e)
 
         return "AI summary unavailable."
 
 # =====================================================
 # BULLET POINT REWRITER
 # =====================================================
-
 def rewrite_resume_bullet(bullet):
 
     try:
 
-        prompt = f"""
+        response = client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=f"""
+            Rewrite this resume bullet professionally
+            with stronger action verbs and metrics.
 
-        Rewrite this resume bullet point
-        professionally with metrics and
-        stronger action verbs.
-
-        Bullet:
-        {bullet}
-        """
-
-        response = gemini_model.generate_content(
-            prompt
+            Bullet:
+            {bullet}
+            """
         )
 
         return response.text
 
-    except:
+    except Exception as e:
+
+        print("GEMINI REWRITE ERROR:", e)
 
         return "Rewrite unavailable."
 
@@ -1090,7 +1085,7 @@ def status():
         "ai_engine": "online",
 
         "model":
-        "Gemini + Ollama + Semantic AI",
+        "Gemini AI",
 
         "timestamp":
         datetime.now().strftime(

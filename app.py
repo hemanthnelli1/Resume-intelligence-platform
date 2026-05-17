@@ -105,11 +105,12 @@ def extract_name(text):
 # =====================================================
 # SEMANTIC SKILL DETECTION
 # =====================================================
-
 def detect_skills(text, skills_db):
     detected = []
+    text_lower = text.lower()
     for skill in skills_db:
-        if skill.lower() in text.lower():
+        # Check for whole word / phrase match
+        if skill.lower() in text_lower:
             detected.append(skill.title())
     return list(set(detected))
 # =====================================================

@@ -110,7 +110,7 @@ def detect_skills(text, skills_db):
     detected = []
     for skill in skills_db:
         if skill.lower() in text.lower():
-            detected.append(skill)
+            detected.append(skill.title())
     return list(set(detected))
 
 # =====================================================
@@ -253,7 +253,7 @@ def get_resume_level(score):
 # =====================================================
 
 def find_missing_skills(all_skills, detected):
-    missing = list(set(all_skills) - set(detected))
+    missing = [s.title() for s in list(set(all_skills) - set(detected))]
     return missing[:10]
 
 # =====================================================

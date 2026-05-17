@@ -48,7 +48,7 @@ init_db()
 def ask_groq(prompt):
     try:
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=1000
         )
@@ -194,14 +194,14 @@ def calculate_ats_score(sections, skills_count, project_count, jd_score, resume_
     ats_score += min(skills_count * 2.5, 20)
 
     advanced_keywords = [
-        "distributed", "lru", "consistent hashing", "cache", "load balancing",
-        "fault tolerance", "high-frequency requests", "segment trees",
-        "dynamic programming", "graph algorithms", "greedy algorithms",
-        "sliding window", "authentication", "api", "node.js", "express",
-        "mysql", "database", "jwt", "react", "javascript", "dsa", "oop",
-        "dbms", "computer networks", "operating systems", "wireshark", "nmap",
-        "docker", "aws", "vercel", "render", "production-ready", "optimized",
-        "responsive", "secure", "scalable"
+        "Distributed", "Lru", "Consistent Hashing", "Cache", "Load Balancing",
+          "Fault Tolerance", "High-Frequency Requests", "Segment Trees",
+            "Dynamic Programming", "Graph Algorithms", "Greedy Algorithms", 
+            "Sliding Window", "Authentication", "Api", "Node.js", "Express", 
+            "Mysql", "Database", "Jwt", "React", "Javascript", "Dsa", "Oop", 
+            "Dbms", "Computer Networks", "Operating Systems", "Wireshark", "Nmap", 
+            "Docker", "Aws", "Vercel", "Render", "Production-Ready", "Optimized",
+              "Responsive", "Secure", "Scalable"
     ]
 
     keyword_hits = 0

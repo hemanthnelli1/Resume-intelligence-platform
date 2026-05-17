@@ -715,34 +715,21 @@ def get_ai_answer(question):
 
     try:
 
-        response = requests.post(
+        prompt = f"""
+        Answer this interview/career question professionally:
 
-            "http://localhost:11434/api/generate",
+        {question}
+        """
 
-            json={
-
-                "model": "phi",
-
-                "prompt": question,
-
-                "stream": False,
-
-                "options": {
-
-                    "temperature": 0.6,
-
-                    "num_predict": 180
-                }
-            }
+        response = gemini_model.generate_content(
+            prompt
         )
 
-        result = response.json()
-
-        return result["response"]
+        return response.text
 
     except Exception as e:
 
-        print("OLLAMA ERROR:", e)
+        print("GEMINI CHAT ERROR:", e)
 
         return "AI engine unavailable."
 
